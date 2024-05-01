@@ -1,0 +1,4 @@
+Id: 046d0069-1d2a-4971-a566-c8489205449b Username: qafarworker Password: qafar1234 IsWorkerOrEmployer: Worker
+Id: 03f18acd-5d73-4e63-8cd5-ab420b332505 Username: johnemployer Password: john1234 IsWorkerOrEmployer: Employer
+Id: 86866736-ae21-42ea-94d6-ce70ffc1ea8d Username: thomasemployer Password: thomas1234 IsWorkerOrEmployer: Employer
+Id: 39632cf1-25ab-48af-bf24-29cd4b7c8140 Username: bruceworker Password: bruce1234 IsWorkerOrEmployer: Worker

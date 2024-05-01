@@ -1,0 +1,44 @@
+[
+  {
+    "Id": "046d0069-1d2a-4971-a566-c8489205449b",
+    "Name": "Qafar",
+    "Surname": "Kerimov",
+    "City": "Baku",
+    "Phone": "(+994) 55 555 55 55",
+    "Age": 20,
+    "Cv": {
+      "Profession": "Programnig",
+      "School": 133,
+      "UniversityPoint": 479,
+      "Skills": "C#, C++",
+      "CompaniesWorked": "Step It",
+      "BeginingWorkTime": "15/05/2023",
+      "EndingWorkTime": "11/02/2024",
+      "Languages": "English B1",
+      "RedDegree": false,
+      "GithubLink": "https://github.com/QafarK",
+      "LinkedinLink": "https://www.linkedin.com/in/qafar-undefined-9497a5286/"
+    }
+  },
+  {
+    "Id": "39632cf1-25ab-48af-bf24-29cd4b7c8140",
+    "Name": "Bruce",
+    "Surname": "Wayne",
+    "City": "Arkham",
+    "Phone": "(+994) 50 555 00 55",
+    "Age": 30,
+    "Cv": {
+      "Profession": "Developer",
+      "School": 100,
+      "UniversityPoint": 605,
+      "Skills": "C, C++",
+      "CompaniesWorked": "Arkham",
+      "BeginingWorkTime": "11/02/2000",
+      "EndingWorkTime": "14/03/2007",
+      "Languages": "English C2",
+      "RedDegree": true,
+      "GithubLink": "https://github.com/QafarK",
+      "LinkedinLink": "https://www.linkedin.com/in/qafar-undefined-9497a5286/"
+    }
+  }
+]

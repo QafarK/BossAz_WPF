@@ -1,8 +1,6 @@
-﻿using BossAz_WPF.Models;
-using BossAz_WPF.ViewModels;
-using BossAzWPF.Commands;
+﻿using BossAz_WPF.ViewModels;
+using BossAz_WPF.Views;
 using System.ComponentModel;
-using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,9 +39,25 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     }
     private void LogIn_Button_Click(object sender, RoutedEventArgs e)
     {
+        // if(json file
         Hide();
         LoginWindow loginWindow = new();
         loginWindow.ShowDialog();
+    }
+    private void SignUp_Button_Click(object sender, RoutedEventArgs e)
+    {
+        SignUpViewModel? signUpWindow = null;
+
+
+        if (worker.IsChecked == true || employer.IsChecked == true)
+        {
+            Hide();
+            signUpWindow = new SignUpViewModel();
+            signUpWindow.ShowDialog();
+
+            if (signUpWindow.DialogResult == false)
+                Show();
+        }
     }
 
 
@@ -58,6 +72,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             passwordLabel.Foreground = Brushes.Gray;
             textBoxUsername.Foreground = Brushes.Gray;
             textBoxPassword.Foreground = Brushes.Gray;
+            textBoxUsername.Background = Brushes.White;
+            textBoxPassword.Background = Brushes.White;
         }
         else
         {
@@ -68,16 +84,16 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             passwordLabel.Foreground = brush;
             textBoxUsername.Foreground = brush;
             textBoxPassword.Foreground = brush;
+            textBoxUsername.Background = Brushes.AliceBlue;
+            textBoxPassword.Background = Brushes.AliceBlue;
         }
     }
 
     private void RadioButton_Click(object sender, RoutedEventArgs e)
     {
         RadioButton? radioButton = sender as RadioButton;
-        if(radioButton is not null && radioButton.IsChecked == true)
-        {
+        if (radioButton is not null && radioButton.IsChecked == true)
             signUp.IsEnabled = true;
-        }
     }
 
 
@@ -112,7 +128,6 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     public void OnPropertyChange([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
     }
 
 }

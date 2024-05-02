@@ -6,7 +6,10 @@ public class Employer:PersonalInformationAbstract
 {
 
     Vacancia _vacancia;
-
+    public Employer():base()
+    {
+        
+    }
     public Employer(string? name, string? surname, string? city, string? phone, int age, Vacancia vacancia) : base(name, surname, city, phone, age)
     {
         Vacancia = vacancia;

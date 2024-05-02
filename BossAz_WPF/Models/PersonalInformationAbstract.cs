@@ -7,7 +7,7 @@ public abstract class PersonalInformationAbstract
     string? _name;
     string? _surname;
     string? _city;
-    string? _phone;
+    string? _phone= "(+994) ";
     int _age;
 
     public string? Id { get; set; }
@@ -37,8 +37,12 @@ public abstract class PersonalInformationAbstract
         }
     }
     public int Age { get => _age; set => _age = value; }
+    protected PersonalInformationAbstract()
+    {
+        Id = Guid.NewGuid().ToString();
 
-    public PersonalInformationAbstract(string? name, string? surname, string? city, string? phone, int age)
+    }
+    protected PersonalInformationAbstract(string? name, string? surname, string? city, string? phone, int age)
     {
         Id = Guid.NewGuid().ToString();
         Name = name;

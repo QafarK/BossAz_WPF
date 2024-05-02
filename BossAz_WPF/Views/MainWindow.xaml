@@ -48,12 +48,12 @@
             </Label>
             <TextBox
                 x:Name="textBoxUsername"
+                Background="AliceBlue"
                 Width="350"
                 Height="45"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                FontSize="20"
-                />
+                FontSize="20" />
 
 
             <Label
@@ -67,12 +67,12 @@
             </Label>
             <PasswordBox
                 x:Name="textBoxPassword"
+                Background="AliceBlue"
                 Width="350"
                 Height="45"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                FontSize="20"
-                 />
+                FontSize="20" />
             <Button
                 Height="45"
                 Margin="0,40,0,0"
@@ -101,6 +101,7 @@
                 <RadioButton
                     x:Name="employer"
                     Checked="RadioButton_Click"
+                    FontSize="13"
                     FontWeight="SemiBold">
                     As Employer
                 </RadioButton>
@@ -108,6 +109,7 @@
                     x:Name="worker"
                     Margin="0,5,0,0"
                     Checked="RadioButton_Click"
+                    FontSize="13"
                     FontWeight="SemiBold">
                     As Worker
                 </RadioButton>
@@ -116,10 +118,11 @@
             <Button
                 x:Name="signUp"
                 Height="45"
-                Margin="0,25,0,0"
+                Margin="0,20,0,0"
                 VerticalContentAlignment="Center"
                 FontSize="15"
-                IsEnabled="False">
+                IsEnabled="False"
+                Click="SignUp_Button_Click">
                 Sign up
             </Button>
             <!--<ComboBox />-->

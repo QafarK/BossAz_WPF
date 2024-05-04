@@ -1,4 +1,5 @@
 ﻿using BossAz_WPF.Models;
+using System.Windows.Controls;
 
 namespace BossAzWPF.Models;
 
@@ -10,12 +11,12 @@ public class Employer:PersonalInformationAbstract
     {
         
     }
-    public Employer(string? name, string? surname, string? city, string? phone, int age, Vacancia vacancia) : base(name, surname, city, phone, age)
+    public Employer(string? name, string? surname, string? city, string? phone, int age, bool genderMale, bool genderFemale, Vacancia vacancia) : base(name, surname, city, phone, age, genderMale, genderFemale)
     {
         Vacancia = vacancia;
     }
     public Vacancia Vacancia { get => _vacancia; set => _vacancia = value; }
-    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City}  Phone:  {Phone} Age: {Age} {Vacancia}";
+    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City}  Phone:  {Phone} Age: {Age} GenderMale: {GenderMale} {Vacancia}";
 }
 
 public class Vacancia

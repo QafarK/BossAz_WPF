@@ -4,14 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:BossAz_WPF.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="SignUpEmployerWindow"
+    Title="SignUpWindow"
     Width="600"
-    Height="800"
+    Height="900"
     MinWidth="480"
     MinHeight="350"
     MaxWidth="600"
     mc:Ignorable="d">
+
     <Grid>
         <ScrollViewer>
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
@@ -30,53 +32,125 @@
                     FontSize="15"
                     FontWeight="SemiBold"
                     Header="Name">
-                    <TextBox FontSize="18" Text="{Binding NewEmployer.Name}" />
+                    <TextBox
+                        Background="AliceBlue"
+                        FontSize="18"
+                        Text="{Binding NewEmployer.Name, UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
+                <Label
+                    x:Name="nameError"
+                    Height="20"
+                    Margin="7,0,0,0"
+                    FontSize="11"
+                    Foreground="Red" />
                 <GroupBox
                     Width="400"
                     Margin="0,15,0,0"
                     FontSize="15"
                     FontWeight="SemiBold"
                     Header="Surname">
-                    <TextBox FontSize="18" Text="{Binding NewEmployer.Surname}" />
+                    <TextBox
+                        Background="AliceBlue"
+                        FontSize="18"
+                        Text="{Binding NewEmployer.Surname, UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
+                <Label
+                    x:Name="surnameError"
+                    Height="20"
+                    Margin="7,0,0,0"
+                    FontSize="11"
+                    Foreground="Red" />
                 <GroupBox
                     Width="400"
                     Margin="0,15,0,0"
                     FontSize="15"
                     FontWeight="SemiBold"
                     Header="City">
-                    <ComboBox FontSize="18" FontWeight="SemiBold">
+                    <ComboBox
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        SelectedValue="{Binding NewEmployer.City, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem Content="Ankara" />
                         <ComboBoxItem Content="Baku" />
                         <ComboBoxItem Content="Istanbul" />
                         <ComboBoxItem Content="Sumqayit" />
                     </ComboBox>
                 </GroupBox>
+                <Label
+                    x:Name="comboboxError"
+                    Height="20"
+                    Margin="7,0,0,0"
+                    FontSize="11"
+                    Foreground="Red" />
                 <GroupBox
                     Width="400"
                     Margin="0,15,0,0"
                     FontSize="15"
                     FontWeight="SemiBold"
                     Header="Phone">
-                    <TextBox FontSize="18" Text="{Binding NewEmployer.Phone, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox
+                        x:Name="textBoxPhone"
+                        Background="AliceBlue"
+                        FontSize="18"
+                        Text="{Binding NewEmployer.Phone, UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
-
+                <Label
+                    x:Name="phoneError"
+                    Height="20"
+                    Margin="7,0,0,0"
+                    FontSize="11"
+                    Foreground="Red" />
                 <GroupBox
                     Width="400"
                     Margin="0,15,0,0"
                     FontSize="15"
                     FontWeight="SemiBold"
                     Header="Age">
-                    <TextBox FontSize="18" Text="{Binding NewEmployer.Age}" />
+                    <TextBox
+                        Background="AliceBlue"
+                        FontSize="18"
+                        Text="{Binding NewEmployer.Age, UpdateSourceTrigger=PropertyChanged}" />
                 </GroupBox>
+                <Label
+                    x:Name="ageError"
+                    Height="20"
+                    Margin="7,0,0,0"
+                    FontSize="11"
+                    Foreground="Red" />
 
+                <!--<TextBlock
+                    Background="#FF673AB7"
+                    Margin="10,10,0,10"
+                    FontSize="15"
+                    FontWeight="SemiBold"
+                    Text="Gender" />-->
+                <GroupBox
+                    Width="400"
+                    Margin="0,15,0,0"
+                    FontSize="15"
+                    FontWeight="SemiBold"
+                    Header="Gender">
+                    <StackPanel>
+                        <RadioButton Content="Male" IsChecked="{Binding NewEmployer.GenderMale}" />
+                        <RadioButton
+                            Margin="0,8,0,0"
+                            Content="Female"
+                            IsChecked="{Binding NewEmployer.GenderFemale}" />
+                    </StackPanel>
+                </GroupBox>
+                <Label
+                    x:Name="genderError"
+                    Height="20"
+                    Margin="7,0,0,0"
+                    FontSize="11"
+                    Foreground="Red" />
+                <!--  Click="Button_Click"  -->
                 <Button
                     Width="200"
                     Height="50"
                     Margin="0,40,0,30"
                     VerticalContentAlignment="Center"
-                    Click="Button_Click"
+                    Command="{Binding SignUpCommand}"
                     Content="Sign Up"
                     FontSize="15" />
 

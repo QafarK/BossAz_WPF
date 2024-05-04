@@ -1,14 +1,15 @@
 ﻿using BossAz_WPF.Models;
+using System.Windows.Controls;
 
 namespace BossAzWPF.Models;
 
-public class Worker:PersonalInformationAbstract
+public class Worker : PersonalInformationAbstract
 {
     CV _cv;
 
     public CV Cv { get => _cv; set => _cv = value; }
 
-    public Worker(string? name, string? surname, string? city, string? phone, int age, CV cv):base(name,surname,city,phone,age)
+    public Worker(string? name, string? surname, string? city, string? phone, int age, bool genderMale, bool genderFemale, CV cv) : base(name, surname, city, phone, age, genderMale, genderFemale)
     {
         Cv = cv;
     }

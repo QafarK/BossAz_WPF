@@ -48,7 +48,6 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         SignUpViewModel? signUpWindow = null;
 
-
         if (worker.IsChecked == true || employer.IsChecked == true)
         {
             Hide();

@@ -15,3 +15,20 @@
         </ResourceDictionary>
     </Application.Resources>
 </Application>
+
+<!--
+    // FOLDERS
+    static string folderPath_DataBase = Path.Combine("..\\..\\..\\", "DateBase");
+    static string folderPath_ModelsConvertedFile = Path.Combine("..\\..\\..\\", "ModelsConvertedFile");
+    static string folderPath_JSON = Path.Combine("..\\..\\..\\", "JSON");
+    static string folderPath_Notification = Path.Combine("..\\..\\..\\", "Notification");
+    
+    //FILES & JSON
+    static string filePath_DataBaseFile = Path.Combine(folderPath_DataBase, "DataBaseFile.txt");
+    static string jsonPath_DataBase = Path.Combine(folderPath_DataBase, "DataBase.json");
+    static string filePath_WorkerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "WorkerClassInfos.txt");
+    static string filePath_EmployerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "EmployerClassInfos.txt");
+    static string jsonPath_UsersDataAboutWorker = Path.Combine(folderPath_JSON, "UsersDataAboutWorker.json");
+    static string jsonPath_UsersDataAboutEmployer = Path.Combine(folderPath_JSON, "UsersDataAboutEmployer.json");
+    static string filePath_Notification = Path.Combine(folderPath_Notification, "Notifcation.txt");
+-->

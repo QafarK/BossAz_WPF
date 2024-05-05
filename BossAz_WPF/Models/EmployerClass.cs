@@ -11,12 +11,12 @@ public class Employer:PersonalInformationAbstract
     {
         
     }
-    public Employer(string? name, string? surname, string? city, string? phone, int age, bool genderMale, bool genderFemale, Vacancia vacancia) : base(name, surname, city, phone, age, genderMale, genderFemale)
+    public Employer(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale, Vacancia vacancia) : base(name, surname, city, phone, age, genderMale, genderFemale)
     {
         Vacancia = vacancia;
     }
     public Vacancia Vacancia { get => _vacancia; set => _vacancia = value; }
-    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City}  Phone:  {Phone} Age: {Age} GenderMale: {GenderMale} {Vacancia}";
+    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City}  Phone:  {Phone} BirthDate: {BirthDate} GenderMale: {GenderMale} {Vacancia}";
 }
 
 public class Vacancia

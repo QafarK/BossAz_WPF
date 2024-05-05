@@ -9,14 +9,14 @@ public class Worker : PersonalInformationAbstract
 
     public CV Cv { get => _cv; set => _cv = value; }
 
-    public Worker(string? name, string? surname, string? city, string? phone, int age, bool genderMale, bool genderFemale, CV cv) : base(name, surname, city, phone, age, genderMale, genderFemale)
+    public Worker(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale, CV cv) : base(name, surname, city, phone, age, genderMale, genderFemale)
     {
         Cv = cv;
     }
 
-    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City} Phone: {Phone} Age: {Age} {Cv.ToString2()}";
+    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City} Phone: {Phone} BirthDate: {BirthDate} {Cv.ToString2()}";
 
-    public string ToStringDropn() => $"Id: {Id}\n Name: {Name}\n Surname: {Surname}\n City: {City}\n Phone: {Phone}\n Age: {Age}\n {Cv.ToStringDropn()}";
+    public string ToStringDropn() => $"Id: {Id}\n Name: {Name}\n Surname: {Surname}\n City: {City}\n Phone: {Phone}\n BirthDate: {BirthDate}\n {Cv.ToStringDropn()}";
 }
 
 public class CV

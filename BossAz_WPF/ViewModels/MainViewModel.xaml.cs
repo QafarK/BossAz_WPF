@@ -1,5 +1,4 @@
 ﻿using BossAz_WPF.ViewModels;
-using BossAz_WPF.Views;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -7,9 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace BossAzWPF;
+namespace BossAzWPF.ViewModels;
 
-public partial class MainWindow : Window, INotifyPropertyChanged
+public partial class MainWindow : Window
 {
 
 
@@ -41,8 +40,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         // if(json file
         Hide();
-        LoginWindow loginWindow = new();
-        loginWindow.ShowDialog();
+        //Login window=new()
     }
     private void SignUp_Button_Click(object sender, RoutedEventArgs e)
     {
@@ -51,7 +49,14 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         if (worker.IsChecked == true || employer.IsChecked == true)
         {
             Hide();
-            signUpWindow = new SignUpViewModel();
+
+            if (worker.IsChecked == true)
+                signUpWindow = new SignUpViewModel();//"Worker"
+            else if (employer.IsChecked == true)
+                signUpWindow = new SignUpViewModel();//"Employer"
+            else
+                throw new KeyNotFoundException();
+
             signUpWindow.ShowDialog();
 
             if (signUpWindow.DialogResult == false)

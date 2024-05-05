@@ -5,13 +5,13 @@ using System.Windows.Controls;
 
 namespace BossAz_WPF.Models;
 
-public abstract class PersonalInformationAbstract
+public class PersonalInformationAbstract
 {
     string? _name;
     string? _surname;
     string? _city;
-    string? _phone = "(+994)-";
-    int _age;
+    string? _phone = "(+994)";
+    DateTime _birthDate=new(1900,1,1);
     bool _genderMale;
     bool _genderFemale;
     public string? Id { get; set; }
@@ -36,27 +36,27 @@ public abstract class PersonalInformationAbstract
         get => _phone;
         set
         {
-            value = value!.Replace(' ', '-');
+            //value = value!.Replace(' ', '-');
             _phone = value;
         }
     }
-    public int Age { get => _age; set => _age = value; }
+    public DateTime BirthDate { get => _birthDate; set => _birthDate = value; }
     public bool GenderMale { get => _genderMale; set { _genderMale = value; } }
     public bool GenderFemale { get => _genderFemale; set => _genderFemale = value; }
 
-    protected PersonalInformationAbstract()
+    public PersonalInformationAbstract()
     {
         Id = Guid.NewGuid().ToString();
 
     }
-    protected PersonalInformationAbstract(string? name, string? surname, string? city, string? phone, int age, bool genderMale, bool genderFemale)
+    protected PersonalInformationAbstract(string? name, string? surname, string? city, string? phone, DateTime birthDate, bool genderMale, bool genderFemale)
     {
         Id = Guid.NewGuid().ToString();
         Name = name;
         Surname = surname;
         City = city;
         Phone = phone;
-        Age = age;
+        BirthDate = birthDate;
         GenderMale = genderMale;
         GenderFemale = genderFemale;
     }

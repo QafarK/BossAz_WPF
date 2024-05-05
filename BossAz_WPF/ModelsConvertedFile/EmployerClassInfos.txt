@@ -1,2 +1,0 @@
-Id: 03f18acd-5d73-4e63-8cd5-ab420b332505 Name: John Surname: Wick City: London Phone: (+994)-70-700-77-77 Age: 45 Title: need-react-developer Text: javascript,-react-
-Id: 86866736-ae21-42ea-94d6-ce70ffc1ea8d Name: Thomas Surname: Wayne City: Arkham Phone: (+994)-50-444-44-44 Age: 60 Title: I-need-html-developer Text: html,-css-and-javascript

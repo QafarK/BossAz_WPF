@@ -1,28 +1,27 @@
-﻿using BossAz_WPF.Models;
+﻿using BossAz_WPF.Windows;
+using BossAzWPF;
 using BossAzWPF.Commands;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using System.Windows;
 using System.Windows.Input;
 
-namespace BossAz_WPF.ViewModels;
+namespace BossAz_WPF.Models.ViewModels;
 
-public partial class SignUpViewModel : Window, INotifyPropertyChanged
+public class SignUpViewModel : BaseClass
 {
-    //string? _isWorkerOrEmployer="Employer";
-    //public string? IsWorkerOrEmployer
-    //{
-    //    get => _isWorkerOrEmployer; set
-    //    {
-    //        if (value is not null && (value.Equals("Worker") || value.Equals("Employer")))
-    //            _isWorkerOrEmployer = value;
-    //        else
-    //            throw new KeyNotFoundException();
-    //    }
-    //}
-    private PersonalInformationAbstract? newPerson;
-    public PersonalInformationAbstract? NewPerson { get => newPerson; set { newPerson = value; OnPropertyChange(); } }
+    string? _isWorkerOrEmployer;
+    public string? IsWorkerOrEmployer
+    {
+        get => _isWorkerOrEmployer;
+        set
+        {
+            if (value is not null && (value.Equals("Worker") || value.Equals("Employer")))
+                _isWorkerOrEmployer = value;
+            else
+                throw new KeyNotFoundException();
+        }
+    }
+    private PersonalInformation? newPerson;
+    public PersonalInformation? NewPerson { get => newPerson; set { newPerson = value; OnPropertyChange(); } }
 
     string? errorName;
     string? errorSurname;
@@ -37,22 +36,10 @@ public partial class SignUpViewModel : Window, INotifyPropertyChanged
 
     public ICommand SignUpCommand { get; set; }
 
-    public SignUpViewModel()//string isWorkerOrEmployer="Employer"
+    public SignUpViewModel()
     {
-        InitializeComponent();
-        DataContext = this;
-        NewPerson = new();
+        NewPerson = App.Container.GetInstance<PersonalInformation>();
         SignUpCommand = new RelayCommand(SignUpExecute, CanSignUp);
-        //IsWorkerOrEmployer = isWorkerOrEmployer;
-    }
-
-    public SignUpViewModel(PersonalInformationAbstract personalInformation)//string isWorkerOrEmployer="Employer"
-    {
-        InitializeComponent();
-        DataContext = this;
-        NewPerson = personalInformation;
-        SignUpCommand = new RelayCommand(SignUpExecute, CanSignUp);
-        //IsWorkerOrEmployer = isWorkerOrEmployer;
     }
     public bool CanSignUp(object? obj)
     {
@@ -68,11 +55,11 @@ public partial class SignUpViewModel : Window, INotifyPropertyChanged
         string pattern = @"^[A-Z][a-z]+$";
         regex = new(pattern);
         if (string.IsNullOrEmpty(NewPerson!.Name) || NewPerson.Name.Length < 3 || !regex.IsMatch(NewPerson.Name))
-            ErrorName = "*Must enter name, for example: Thomas";
+            ErrorName = "*Must enter name, for example: Ali";
         else
             ErrorName = null;
         if (string.IsNullOrEmpty(NewPerson!.Surname) || NewPerson.Surname.Length < 3 || !regex.IsMatch(NewPerson.Surname))
-            ErrorSurname = "*Must enter surname, for example: Wayne";
+            ErrorSurname = "*Must enter surname, for example: Aliyev";
         else
             ErrorSurname = null;
         if (string.IsNullOrEmpty(NewPerson!.City))
@@ -97,25 +84,19 @@ public partial class SignUpViewModel : Window, INotifyPropertyChanged
         else
             ErrorBirthDate = null;
         //------------------------------------------------------------------------------------------------
-        if (ErrorName is null && ErrorSurname is null && ErrorPhone is null && ErrorBirthDate is null)
+        //                                             EXECUTE
+        if (ErrorName is null && ErrorSurname is null && ErrorPhone is null && ErrorBirthDate is null && IsWorkerOrEmployer is not null)
         {
-            SignUpUsernameViewModel signUpUsername = new(NewPerson);
+            var currentView = App.Container.GetInstance<SignUpWindow>();
+            currentView.Hide();
 
-            Hide();
-            //MessageBox.Show(NewPerson.City);
-            signUpUsername.ShowDialog();
-
-            
-            
+            var view = App.Container.GetInstance<SignUpUsernameWindow>();
+            App.Container.GetInstance<SignUpUsernameViewModel>().PersonalInformation = NewPerson;
+            App.Container.GetInstance<SignUpUsernameViewModel>().IsWorkerOrEmployer = IsWorkerOrEmployer;
+            view.DataContext = App.Container.GetInstance<SignUpUsernameViewModel>();
+            view.Show();
         }
+        else if (IsWorkerOrEmployer is null)
+            throw new KeyNotFoundException();
     }
-
-
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-    public void OnPropertyChange([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
 }

@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace BossAzWPF.Models;
 
-public class Worker : PersonalInformationAbstract
+public class Worker : PersonalInformation
 {
     CV _cv;
 
@@ -14,6 +14,8 @@ public class Worker : PersonalInformationAbstract
         Cv = cv;
     }
 
+    public Worker(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale) : base(name, surname, city, phone, age, genderMale, genderFemale)
+    { }
     public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City} Phone: {Phone} BirthDate: {BirthDate} {Cv.ToString2()}";
 
     public string ToStringDropn() => $"Id: {Id}\n Name: {Name}\n Surname: {Surname}\n City: {City}\n Phone: {Phone}\n BirthDate: {BirthDate}\n {Cv.ToStringDropn()}";

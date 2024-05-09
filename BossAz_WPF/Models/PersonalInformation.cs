@@ -1,18 +1,13 @@
-﻿using BossAzWPF.Models;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
+﻿namespace BossAz_WPF.Models;
 
-namespace BossAz_WPF.Models;
-
-public class PersonalInformationAbstract
+public class PersonalInformation
 {
-    string? _name;
-    string? _surname;
-    string? _city;
-    string? _phone = "(+994)";
-    DateTime _birthDate=new(1900,1,1);
-    bool _genderMale;
+    string? _name="Qafar";
+    string? _surname="Kerimov";
+    string? _city="Ankara";
+    string? _phone = "(+994) 55 555 55 55";
+    DateTime _birthDate=new(DateTime.Now.Year,11,11);
+    bool _genderMale=true;
     bool _genderFemale;
     public string? Id { get; set; }
     public string? Name { get => _name; set => _name = value; }
@@ -22,12 +17,12 @@ public class PersonalInformationAbstract
         get => _city;
         set
         {
-            if (value.Contains(' '))
-            {
-                value = value.Replace(' ', '-');
-                _city = value;
-            }
-            else
+            //if (value.Contains(' '))
+            //{
+            //    value = value.Replace(' ', '-');
+            //    _city = value;
+            //}
+            //else
                 _city = value;
         }
     }
@@ -44,12 +39,12 @@ public class PersonalInformationAbstract
     public bool GenderMale { get => _genderMale; set { _genderMale = value; } }
     public bool GenderFemale { get => _genderFemale; set => _genderFemale = value; }
 
-    public PersonalInformationAbstract()
+    public PersonalInformation()
     {
         Id = Guid.NewGuid().ToString();
 
     }
-    protected PersonalInformationAbstract(string? name, string? surname, string? city, string? phone, DateTime birthDate, bool genderMale, bool genderFemale)
+    protected PersonalInformation(string? name, string? surname, string? city, string? phone, DateTime birthDate, bool genderMale, bool genderFemale)
     {
         Id = Guid.NewGuid().ToString();
         Name = name;

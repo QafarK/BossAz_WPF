@@ -22,5 +22,11 @@
     "Username": "bruceworker",
     "Password": "bruce1234",
     "IsWorkerOrEmployer": "Worker"
+  },
+  {
+    "Id": "a0fcf95b-bdfb-4d97-b084-3a077e3faf36",
+    "Username": "qafarworker4",
+    "Password": "qafar1234",
+    "IsWorkerOrEmployer": "Employer"
   }
 ]

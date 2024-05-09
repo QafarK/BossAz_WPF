@@ -3,7 +3,7 @@ using System.Windows.Controls;
 
 namespace BossAzWPF.Models;
 
-public class Employer:PersonalInformationAbstract
+public class Employer:PersonalInformation
 {
 
     Vacancia _vacancia;

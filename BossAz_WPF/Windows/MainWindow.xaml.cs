@@ -1,9 +1,6 @@
 ﻿using System.Windows;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Controls;
 using BossAzWPF;
 using BossAz_WPF.Models.ViewModels;
 
@@ -17,41 +14,11 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-
-    private void LogIn_Button_Click(object sender, RoutedEventArgs e)
-    {
-        // if(json file
-        Hide();
-        //Login window=new()
-    }
-    private void SignUp_Button_Click(object sender, RoutedEventArgs e)
-    {
-        var view = App.Container.GetInstance<SignUpWindow>();
-        view.DataContext = App.Container.GetInstance<SignUpViewModel>();
-
-        var viewModel = App.Container.GetInstance<SignUpViewModel>();
-        if (worker.IsChecked == true || employer.IsChecked == true)
-        {
-            Hide();
-
-            if (worker.IsChecked == true)
-                viewModel.IsWorkerOrEmployer = "Worker";
-            else if (employer.IsChecked == true)
-                viewModel.IsWorkerOrEmployer = "Employer";
-            else
-                throw new KeyNotFoundException();
-
-            view.Show();
-        }
-    }
-
-    #region Events
     private void Window_MouseMove(object sender, MouseEventArgs e)
     {
+        Point currentPosition = e.GetPosition(this);
 
-        System.Windows.Point currentPosition = e.GetPosition(this);
-
-        if (currentPosition.Y > 420)
+        if (currentPosition.Y > 440)
         {
             usernameLabel.Foreground = Brushes.Gray;
             passwordLabel.Foreground = Brushes.Gray;
@@ -74,14 +41,16 @@ public partial class MainWindow : Window
         }
     }
 
-    private void RadioButton_Click(object sender, RoutedEventArgs e)
+    private void textBoxPassword_KeyDown(object sender, KeyEventArgs e)
     {
-        RadioButton? radioButton = sender as RadioButton;
-        if (radioButton is not null && radioButton.IsChecked == true)
-            signUp.IsEnabled = true;
+        if(e.Key == Key.Enter)
+            App.Container.GetInstance<MainViewModel>().LoginCommand.Execute(null);
     }
-    #endregion
 
-
+    private void textBoxUsername_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+            App.Container.GetInstance<MainViewModel>().LoginCommand.Execute(null);
+    }
 }
 

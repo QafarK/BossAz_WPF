@@ -5,13 +5,13 @@ using BossAz_WPF.Windows;
 using BossAz_WPF.Models.ViewModels;
 using BossAz_WPF.Models;
 using System.IO;
+using BossAz_WPF.Models.ViewModels.WindowModels;
 
 namespace BossAzWPF
 {
     public partial class App : Application
     {
-        public static Container Container { get; set; } = new Container();
-        #region MyRegion
+        #region FILES
         // FOLDERS
         public static string folderPath_DataBase = Path.Combine("..\\..\\..\\", "DataBase");
         public static string folderPath_ModelsConvertedFile = Path.Combine("..\\..\\..\\", "ModelsConvertedFile");
@@ -27,6 +27,7 @@ namespace BossAzWPF
         public static string jsonPath_UsersDataAboutEmployer = Path.Combine(folderPath_JSON, "UsersDataAboutEmployer.json");
         public static string filePath_Notification = Path.Combine(folderPath_Notification, "Notifcation.txt");
         #endregion
+        public static Container Container { get; set; } = new Container();
         public App()
         {
             Container.RegisterSingleton<AppDbContext>();
@@ -45,6 +46,7 @@ namespace BossAzWPF
             Container.RegisterSingleton<MainViewModel>();
             Container.RegisterSingleton<SignUpViewModel>();
             Container.RegisterSingleton<SignUpUsernameViewModel>();
+            Container.RegisterSingleton<WorkerViewModel>();
         }
 
         private void RegisterViews()
@@ -52,6 +54,8 @@ namespace BossAzWPF
             Container.RegisterSingleton<MainWindow>();
             Container.RegisterSingleton<SignUpWindow>();
             Container.RegisterSingleton<SignUpUsernameWindow>();
+            Container.RegisterSingleton<WorkerWindow>();
+            Container.RegisterSingleton<EmployerWindow>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

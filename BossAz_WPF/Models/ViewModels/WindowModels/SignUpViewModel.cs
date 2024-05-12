@@ -14,10 +14,14 @@ public class SignUpViewModel : BaseClass
         get => _isWorkerOrEmployer;
         set
         {
-            if (value is not null && (value.Equals("Worker") || value.Equals("Employer")))
-                _isWorkerOrEmployer = value;
-            else
-                throw new KeyNotFoundException();
+            if (value is not null)
+            {
+                value = value.Split(' ')[1];
+                if (value.Equals("Worker") || value.Equals("Employer"))
+                    _isWorkerOrEmployer = value;
+                else
+                    throw new KeyNotFoundException();
+            }
         }
     }
     private PersonalInformation? newPerson;
@@ -26,12 +30,10 @@ public class SignUpViewModel : BaseClass
     string? errorName;
     string? errorSurname;
     string? errorBirthDate;
-    string? errorCity;
     string? errorPhone;
     public string? ErrorName { get => errorName; set { errorName = value; OnPropertyChange(); } }
     public string? ErrorSurname { get => errorSurname; set { errorSurname = value; OnPropertyChange(); } }
     public string? ErrorBirthDate { get => errorBirthDate; set { errorBirthDate = value; OnPropertyChange(); } }
-    public string? ErrorCity { get => errorCity; set => errorCity = value; }
     public string? ErrorPhone { get => errorPhone; set { errorPhone = value; OnPropertyChange(); } }
 
     public ICommand SignUpCommand { get; set; }
@@ -43,14 +45,15 @@ public class SignUpViewModel : BaseClass
     }
     public bool CanSignUp(object? obj)
     {
+
         if (NewPerson is not null && !string.IsNullOrEmpty(NewPerson.Name) && !string.IsNullOrEmpty(NewPerson.Surname) && !string.IsNullOrEmpty(NewPerson.City)
-            && NewPerson.BirthDate.Year > 1900 && !string.IsNullOrEmpty(NewPerson.City) && !string.IsNullOrEmpty(NewPerson.Phone) && (NewPerson.GenderMale == true || NewPerson.GenderFemale == true))
+            && !string.IsNullOrEmpty(NewPerson.City) && !string.IsNullOrEmpty(NewPerson.Phone) && !string.IsNullOrEmpty(IsWorkerOrEmployer) && (NewPerson.GenderMale == true || NewPerson.GenderFemale == true))
             return true;
         return false;
     }
 
     public void SignUpExecute(object? obj)
-    {
+    { 
         Regex regex;
         string pattern = @"^[A-Z][a-z]+$";
         regex = new(pattern);
@@ -62,10 +65,6 @@ public class SignUpViewModel : BaseClass
             ErrorSurname = "*Must enter surname, for example: Aliyev";
         else
             ErrorSurname = null;
-        if (string.IsNullOrEmpty(NewPerson!.City))
-            ErrorCity = "*Must enter city";
-        else
-            ErrorCity = null;
         pattern = @"^\(\+994\) (50|51|55|70) \d{3} \d{2} \d{2}$";
         regex = new(pattern);
         if (!regex.IsMatch(NewPerson.Phone!))
@@ -96,7 +95,5 @@ public class SignUpViewModel : BaseClass
             view.DataContext = App.Container.GetInstance<SignUpUsernameViewModel>();
             view.Show();
         }
-        else if (IsWorkerOrEmployer is null)
-            throw new KeyNotFoundException();
     }
 }

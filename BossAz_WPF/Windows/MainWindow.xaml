@@ -5,13 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:BossAzWPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:w="clr-namespace:BossAz_WPF.Models"
     Title="MainWindow"
     Width="500"
-    Height="650"
+    Height="600"
     MinWidth="400"
-    MinHeight="650"
+    MinHeight="600"
     MaxWidth="600"
-    MaxHeight="700"
+    MaxHeight="600"
     MouseMove="Window_MouseMove"
     mc:Ignorable="d">
     <Grid>
@@ -53,7 +54,9 @@
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 Background="AliceBlue"
-                FontSize="20" />
+                FontSize="20"
+                KeyDown="textBoxUsername_KeyDown"
+                Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
 
 
             <Label
@@ -71,61 +74,43 @@
                 Height="45"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
+                w:PasswordHelper.Attach="True"
+                w:PasswordHelper.Password="{Binding Password, Mode=TwoWay}"
                 Background="AliceBlue"
-                FontSize="20" />
+                FontSize="20"
+                KeyDown="textBoxPassword_KeyDown" />
             <Button
                 Height="45"
                 Margin="0,40,0,0"
                 VerticalContentAlignment="Center"
-                Click="LogIn_Button_Click"
+                Command="{Binding LoginCommand}"
                 FontSize="15">
                 Log in
             </Button>
-
+            <TextBlock
+                Height="30"
+                Margin="7,0,0,0"
+                FontSize="15"
+                Foreground="Red"
+                Text="{Binding ErrorLogin}" />
 
             <TextBlock
-                Margin="0,9,0,5"
+                Margin="0,12,0,5"
                 HorizontalAlignment="Center"
-                FontSize="14"
+                FontSize="16"
                 FontWeight="SemiBold">
                 or
             </TextBlock>
-            <TextBlock
-                Margin="0,3,0,0"
-                HorizontalAlignment="Center"
-                FontSize="15"
-                FontWeight="Bold">
-                Sign Up
-            </TextBlock>
-            <StackPanel Margin="0,7,0,0">
-                <RadioButton
-                    x:Name="employer"
-                    Checked="RadioButton_Click"
-                    FontSize="13"
-                    FontWeight="SemiBold">
-                    As Employer
-                </RadioButton>
-                <RadioButton
-                    x:Name="worker"
-                    Margin="0,5,0,0"
-                    Checked="RadioButton_Click"
-                    FontSize="13"
-                    FontWeight="SemiBold">
-                    As Worker
-                </RadioButton>
 
-            </StackPanel>
             <Button
                 x:Name="signUp"
                 Height="45"
                 Margin="0,20,0,0"
                 VerticalContentAlignment="Center"
-                Click="SignUp_Button_Click"
-                FontSize="15"
-                IsEnabled="False">
+                Command="{Binding SignUpCommand}"
+                FontSize="15">
                 Sign up
             </Button>
-            <!--<ComboBox />-->
         </StackPanel>
 
         <!--<TabControl Margin="20,0,20,0" TabStripPlacement="Bottom">

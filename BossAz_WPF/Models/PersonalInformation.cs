@@ -2,11 +2,11 @@
 
 public class PersonalInformation
 {
-    string? _name="Qafar";
-    string? _surname="Kerimov";
-    string? _city="Ankara";
-    string? _phone = "(+994) 55 555 55 55";
-    DateTime _birthDate=new(DateTime.Now.Year,11,11);
+    string? _name;
+    string? _surname;
+    string? _city;
+    string? _phone;
+    DateTime _birthDate=new(DateTime.Now.Year,1,1);
     bool _genderMale=true;
     bool _genderFemale;
     public string? Id { get; set; }

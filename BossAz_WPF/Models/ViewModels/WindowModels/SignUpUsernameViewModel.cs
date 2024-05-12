@@ -3,10 +3,7 @@ using BossAzWPF;
 using BossAzWPF.Commands;
 using BossAzWPF.Models;
 using Newtonsoft.Json;
-using System.ComponentModel;
 using System.IO;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -105,12 +102,20 @@ public class SignUpUsernameViewModel : BaseClass
             return true;
         return false;
     }
+    public void BackExecute(object? obj)
+    {
+        var thisView = App.Container.GetInstance<SignUpUsernameWindow>();
+        thisView.Hide();
 
+        var view = App.Container.GetInstance<SignUpWindow>();
+        App.Container.GetInstance<SignUpViewModel>().NewPerson = PersonalInformation;
+        view.DataContext = App.Container.GetInstance<SignUpViewModel>();
+        view.Show();
+    }
     public void SignUpExecute(object? obj)
     {
-        //Regex ile password qoy
         Regex regex;
-        if (File.Exists(App.filePath_DataBaseFile))
+        if (File.Exists(App.filePath_DataBaseFile) && App.filePath_DataBaseFile.Length > 0)
         {
             string usernamePattern = @"^[a-z][a-z0-9]+$";
             regex = new(usernamePattern);
@@ -160,7 +165,6 @@ public class SignUpUsernameViewModel : BaseClass
                 }
             }
             reader.Close();
-
         }
 
         string passwordPattern = @"^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$";
@@ -196,26 +200,23 @@ public class SignUpUsernameViewModel : BaseClass
                 else
                     break;
             } while (!readerDB.EndOfStream);
+            readerDB.Close();
 
-            DBlist.Add(new(PersonalInformation!.Id, Username, Password, IsWorkerOrEmployer!));
-            
+            DataBase signUpUser = new(PersonalInformation!.Id, Username, Password, IsWorkerOrEmployer!);
+            DBlist.Add(signUpUser);
+
             string json = JsonConvert.SerializeObject(DBlist, Formatting.Indented);
-
             File.WriteAllText(App.jsonPath_DataBase, json);
+
+            using FileStream fileWriteDB = new(App.filePath_DataBaseFile, FileMode.Append, FileAccess.Write);
+            using StreamWriter writerDB = new StreamWriter(fileWriteDB);
+            writerDB.WriteLine(signUpUser.ToString());
+
+            MessageBox.Show("Account has been successfully created.");
+            App.Container.GetInstance<SignUpUsernameWindow>().Hide();
         }
-        else if (IsWorkerOrEmployer is null)
-            throw new KeyNotFoundException();
     }
 
-    public void BackExecute(object? obj)
-    {
-        var thisView = App.Container.GetInstance<SignUpUsernameWindow>();
-        thisView.Hide();
 
-        var view = App.Container.GetInstance<SignUpWindow>();
-        App.Container.GetInstance<SignUpViewModel>().NewPerson = PersonalInformation;
-        view.DataContext = App.Container.GetInstance<SignUpViewModel>();
-        view.Show();
-    }
 
 }

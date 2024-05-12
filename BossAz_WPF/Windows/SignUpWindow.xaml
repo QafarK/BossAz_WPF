@@ -168,7 +168,7 @@
                             VerticalAlignment="Bottom"
                             FontSize="18"
                             FontWeight="SemiBold"
-                            SelectedValue="{Binding NewPerson.City, UpdateSourceTrigger=PropertyChanged}">
+                            SelectedValue="{Binding IsWorkerOrEmployer, UpdateSourceTrigger=PropertyChanged}">
                             <ComboBoxItem Content="Employer" />
                             <ComboBoxItem Content="Worker" />
                         </ComboBox>

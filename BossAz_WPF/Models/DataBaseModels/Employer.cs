@@ -1,22 +1,26 @@
-﻿using BossAz_WPF.Models;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
-namespace BossAzWPF.Models;
+namespace BossAz_WPF.Models.DataBaseModels;
 
-public class Employer:PersonalInformation
+public class Employer : PersonalInformation
 {
 
-    Vacancia _vacancia;
-    public Employer():base()
-    {
-        
-    }
-    public Employer(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale, Vacancia vacancia) : base(name, surname, city, phone, age, genderMale, genderFemale)
+    Vacancia? _vacancia;
+    public Vacancia? Vacancia { get => _vacancia; set => _vacancia = value; }
+    public Employer(PersonalInformation personalInformation, Vacancia? vacancia = null) : base(personalInformation)
     {
         Vacancia = vacancia;
     }
-    public Vacancia Vacancia { get => _vacancia; set => _vacancia = value; }
-    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City}  Phone:  {Phone} BirthDate: {BirthDate} GenderMale: {GenderMale} {Vacancia}";
+    public Employer(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale, Vacancia? vacancia) : base(name, surname, city, phone, age, genderMale, genderFemale)
+    {
+        Vacancia = vacancia;
+    }
+
+    /// <summary>
+    /// TO STRINGINI DUZELT BURDAN VE WORKER CLASSDAN JSONA VE FILE A YAZ
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City!.Split(' ')[1]} Phone: {Phone!.Replace(' ', '-')} BirthDate: {BirthDate.ToString().Split(' ')[0]} Gender: {(GenderMale is true ? "Male" : "Female")} Vacancia: {(Vacancia is not null ? Vacancia : "null")}";
 }
 
 public class Vacancia

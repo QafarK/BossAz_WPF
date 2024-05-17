@@ -3,9 +3,11 @@ using System.Windows;
 using SimpleInjector;
 using BossAz_WPF.Windows;
 using BossAz_WPF.Models.ViewModels;
-using BossAz_WPF.Models;
 using System.IO;
 using BossAz_WPF.Models.ViewModels.WindowModels;
+using BossAz_WPF.Models.ViewModels.PageModels;
+using BossAz_WPF.Pages;
+using BossAz_WPF.Models.DataBaseModels;
 
 namespace BossAzWPF
 {
@@ -20,6 +22,8 @@ namespace BossAzWPF
 
         //FILES & JSON
         public static string filePath_DataBaseFile = Path.Combine(folderPath_DataBase, "DataBaseFile.txt");
+        public static string filePath_DataBaseFileWorkers = Path.Combine(folderPath_DataBase, "DataBaseFileWorkers.txt");
+        public static string filePath_DataBaseFileEmployers = Path.Combine(folderPath_DataBase, "DataBaseFileEmployers.txt");
         public static string jsonPath_DataBase = Path.Combine(folderPath_DataBase, "DataBase.json");
         public static string filePath_WorkerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "WorkerClassInfos.txt");
         public static string filePath_EmployerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "EmployerClassInfos.txt");
@@ -46,7 +50,13 @@ namespace BossAzWPF
             Container.RegisterSingleton<MainViewModel>();
             Container.RegisterSingleton<SignUpViewModel>();
             Container.RegisterSingleton<SignUpUsernameViewModel>();
+
+            #region Worker
             Container.RegisterSingleton<WorkerViewModel>();
+            Container.RegisterSingleton<WorkerEditProfileViewModel>();
+            Container.RegisterSingleton<WorkerNotificationsViewModel>();
+            Container.RegisterSingleton<WorkerShowVacanciasViewModel>();
+            #endregion
         }
 
         private void RegisterViews()
@@ -54,7 +64,13 @@ namespace BossAzWPF
             Container.RegisterSingleton<MainWindow>();
             Container.RegisterSingleton<SignUpWindow>();
             Container.RegisterSingleton<SignUpUsernameWindow>();
+            #region Worker
             Container.RegisterSingleton<WorkerWindow>();
+            Container.RegisterSingleton<WorkerEditProfilePage>();
+            Container.RegisterSingleton<WorkerNotificationsPage>();
+            Container.RegisterSingleton<WorkerShowVacanciasPage>();
+
+            #endregion
             Container.RegisterSingleton<EmployerWindow>();
         }
 
@@ -62,9 +78,12 @@ namespace BossAzWPF
         {
             var view = Container.GetInstance<MainWindow>();
             view.DataContext = Container.GetInstance<MainViewModel>();
+            //var view = Container.GetInstance<WorkerWindow>();
+            //view.DataContext = Container.GetInstance<WorkerViewModel>();
             view.Show();
 
             base.OnStartup(e);
+
         }
     }
 

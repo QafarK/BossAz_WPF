@@ -1,7 +1,9 @@
-﻿using BossAz_WPF.Windows;
+﻿using BossAz_WPF.Models.DataBaseModels;
+using BossAz_WPF.Windows;
 using BossAzWPF;
 using BossAzWPF.Commands;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Input;
 
 namespace BossAz_WPF.Models.ViewModels;
@@ -45,7 +47,6 @@ public class SignUpViewModel : BaseClass
     }
     public bool CanSignUp(object? obj)
     {
-
         if (NewPerson is not null && !string.IsNullOrEmpty(NewPerson.Name) && !string.IsNullOrEmpty(NewPerson.Surname) && !string.IsNullOrEmpty(NewPerson.City)
             && !string.IsNullOrEmpty(NewPerson.City) && !string.IsNullOrEmpty(NewPerson.Phone) && !string.IsNullOrEmpty(IsWorkerOrEmployer) && (NewPerson.GenderMale == true || NewPerson.GenderFemale == true))
             return true;
@@ -53,7 +54,7 @@ public class SignUpViewModel : BaseClass
     }
 
     public void SignUpExecute(object? obj)
-    { 
+    {
         Regex regex;
         string pattern = @"^[A-Z][a-z]+$";
         regex = new(pattern);

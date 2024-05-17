@@ -1,4 +1,4 @@
-﻿using BossAz_WPF.Models;
+﻿using BossAz_WPF.Models.DataBaseModels;
 using System.Collections.ObjectModel;
 
 namespace BossAz_WPF.AppDBContext;

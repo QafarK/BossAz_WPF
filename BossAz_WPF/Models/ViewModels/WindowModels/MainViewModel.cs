@@ -61,6 +61,7 @@ public class MainViewModel : BaseClass
                                     var view = App.Container.GetInstance<WorkerWindow>();
                                     view.DataContext = App.Container.GetInstance<WorkerViewModel>();
                                     view.Show();
+                                    MessageBox.Show("Your CV is empty. Please fill it in \"EditProfile\"");
                                 }
                                 else if (data[7].Equals("Employer"))
                                 {

@@ -2,4 +2,9 @@ Id: 046d0069-1d2a-4971-a566-c8489205449b Username: qafarworker Password: qafar12
 Id: 03f18acd-5d73-4e63-8cd5-ab420b332505 Username: johnemployer Password: john1234 IsWorkerOrEmployer: Employer
 Id: 86866736-ae21-42ea-94d6-ce70ffc1ea8d Username: thomasemployer Password: thomas1234 IsWorkerOrEmployer: Employer
 Id: 39632cf1-25ab-48af-bf24-29cd4b7c8140 Username: bruceworker Password: bruce1234 IsWorkerOrEmployer: Worker
-Id: b756f735-85d1-4a5b-9d46-1553b629ee17 Username: qafar8 Password: qafar1234 IsWorkerOrEmployer: Worker
+Id: f4283771-b335-4cd6-95cb-2f0ce1d33c06 Username: qwafar Password: qafar1234 IsWorkerOrEmployer: Worker
+Id: 90a2b4ae-e693-4384-8d39-a896adf730c3 Username: qafar2 Password: qafar123 IsWorkerOrEmployer: Employer
+Id: 6d2affdb-fed8-425a-a60a-7f34a37a584a Username: qafarwroker Password: qafar123 IsWorkerOrEmployer: Worker
+Id: c32c2f37-8920-4ac0-81ba-89dfb35581f4 Username: qafar23 Password: qafar1234 IsWorkerOrEmployer: Employer
+Id: ccfd46e7-0886-4d13-b8b7-8ba2ae0d4eb0 Username: qafarew Password: qafar123 IsWorkerOrEmployer: Employer
+Id: f4eb012b-af53-4aa8-82ea-4c66303ee3be Username: qafarwww Password: qafar123 IsWorkerOrEmployer: Worker

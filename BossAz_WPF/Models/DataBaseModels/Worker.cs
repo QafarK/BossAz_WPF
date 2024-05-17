@@ -1,40 +1,37 @@
-﻿using BossAz_WPF.Models;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
-namespace BossAzWPF.Models;
+namespace BossAz_WPF.Models.DataBaseModels;
 
 public class Worker : PersonalInformation
 {
-    CV _cv;
+    CV? _cv;
 
-    public CV Cv { get => _cv; set => _cv = value; }
+    public CV? Cv { get => _cv; set => _cv = value; }
 
-    public Worker(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale, CV cv) : base(name, surname, city, phone, age, genderMale, genderFemale)
+    public Worker(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale, CV? cv = null) : base(name, surname, city, phone, age, genderMale, genderFemale)
     {
         Cv = cv;
     }
 
-    public Worker(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale) : base(name, surname, city, phone, age, genderMale, genderFemale)
-    { }
-    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City} Phone: {Phone} BirthDate: {BirthDate} {Cv.ToString2()}";
+    public Worker(PersonalInformation personalInformation, CV? cv = null) : base(personalInformation)
+    {
+        Cv = cv;
+    }
 
-    public string ToStringDropn() => $"Id: {Id}\n Name: {Name}\n Surname: {Surname}\n City: {City}\n Phone: {Phone}\n BirthDate: {BirthDate}\n {Cv.ToStringDropn()}";
+    //public Worker(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale) : base(name, surname, city, phone, age, genderMale, genderFemale)
+    //{ }
+    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City!.Split(' ')[1]} Phone: {Phone!.Replace(' ', '-')} BirthDate: {BirthDate.ToString().Split(' ')[0]} Gender: {(GenderMale is true ? "Male" : "Female")} Cv: {(Cv is not null ? Cv.ToString2() : "null")}";
+
+    //public string ToStringDropn() => $"Id: {Id}\n Name: {Name}\n Surname: {Surname}\n City: {City}\n Phone: {Phone}\n BirthDate: {BirthDate}\n {Cv.ToStringDropn()}";
 }
 
 public class CV
 {
     string? _profession;
-    int _school;
-    int _universityPoint;
     string? _skills;
     string? _companiesWorked;
-    string _beginingWorkTime;
-    string _endingWorkTime;
-    string? _languages;
-    bool _redDegree;
-    string? _githubLink;
-    string? _linkedinLink;
-
+    string? _beginingWorkTime;
+    string? _endingWorkTime;
     public string? Profession
     {
         get => _profession;
@@ -49,8 +46,7 @@ public class CV
                 _profession = value;
         }
     }
-    public int School { get => _school; set => _school = value; }
-    public int UniversityPoint { get => _universityPoint; set => _universityPoint = value; }
+
     public string? Skills
     {
         get => _skills;
@@ -79,44 +75,21 @@ public class CV
                 _companiesWorked = value;
         }
     }
-    public string BeginingWorkTime { get => _beginingWorkTime; set => _beginingWorkTime = value; }
-    public string EndingWorkTime { get => _endingWorkTime; set => _endingWorkTime = value; }
-    public string? Languages
-    {
-        get => _languages;
-        set
-        {
-            if (value.Contains(' '))
-            {
-                value = value.Replace(' ', '-');
-                _languages = value;
-            }
-            else
-                _languages = value;
-        }
-    }
-    public string? GithubLink { get => _githubLink; set => _githubLink = value; }
-    public string? LinkedinLink { get => _linkedinLink; set => _linkedinLink = value; }
+    public string? BeginingWorkTime { get => _beginingWorkTime; set => _beginingWorkTime = value; }
+    public string? EndingWorkTime { get => _endingWorkTime; set => _endingWorkTime = value; }
 
-    public CV(string? profession, int school, int universityPoint, string? skills, string? companiesWorked,
-        string beginingWorkTime, string endingWorkTime,
-        string? languages, bool redDegree, string? githubLink, string? linkedinLink)
+
+    public CV(string? profession, string? skills, string? companiesWorked, string? beginingWorkTime, string? endingWorkTime)
     {
         Profession = profession;
-        School = school;
-        UniversityPoint = universityPoint;
         Skills = skills;
         CompaniesWorked = companiesWorked;
         BeginingWorkTime = beginingWorkTime;
         EndingWorkTime = endingWorkTime;
-        Languages = languages;
-        _redDegree = redDegree;
-        GithubLink = githubLink;
-        LinkedinLink = linkedinLink;
     }
-    public override string ToString() => @$"Profession: {_profession} School: {_school} University Point: {_universityPoint} Skills: {_skills} Companies Worked: {_companiesWorked} Beginning Work Time: {_beginingWorkTime} Ending Work Time: {_endingWorkTime} Languages: {_languages} Red Degree: {_redDegree} Github Link: {_githubLink} Linkedin Link: {_linkedinLink}";
-    public string ToString2() => @$"Profession: {_profession} School: {_school} University-Point: {_universityPoint} Skills: {_skills} Companies-Worked: {_companiesWorked} Beginning-Work-Time: {_beginingWorkTime} Ending-Work-Time: {_endingWorkTime} Languages: {_languages} Red-Degree: {_redDegree} Github-Link: {_githubLink} Linkedin-Link: {_linkedinLink}";
-    public string ToStringDropn() => $"Profession: {_profession}\n School: {_school}\n University-Point: {_universityPoint}\n Skills: {_skills}\n Companies-Worked: {_companiesWorked}\n Beginning-Work-Time: {_beginingWorkTime}\n Ending-Work-Time: {_endingWorkTime}\n Languages: {_languages}\n Red-Degree: {_redDegree}\n Github-Link: {_githubLink}\n Linkedin-Link: {_linkedinLink}";
+    public override string ToString() => @$"Profession: {_profession} Skills: {_skills} Companies Worked: {_companiesWorked} Beginning Work Time: {_beginingWorkTime} Ending Work Time: {_endingWorkTime}";
+    public string ToString2() => $@"Profession: {_profession} Skills: {_skills} Companies-Worked: {_companiesWorked} Beginning-Work-Time: {_beginingWorkTime} Ending-Work-Time: {_endingWorkTime}";
+    public string ToStringDropn() => $"Profession: {_profession}\n Skills: {_skills}\n Companies-Worked: {_companiesWorked}\n Beginning-Work-Time: {_beginingWorkTime}\n Ending-Work-Time: {_endingWorkTime}";
 
 }
 

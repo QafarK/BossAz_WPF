@@ -15,8 +15,4 @@
     <PackageReference Include="SimpleInjector" Version="5.4.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\ViewModels\PageModels\" />
-  </ItemGroup>
-
 </Project>

@@ -1,13 +1,15 @@
-﻿namespace BossAz_WPF.Models;
+﻿using System.Xml.Linq;
+
+namespace BossAz_WPF.Models.DataBaseModels;
 
 public class PersonalInformation
 {
-    string? _name;
-    string? _surname;
+    string? _name = "Qafar";
+    string? _surname = "Kerimov";
     string? _city;
-    string? _phone;
-    DateTime _birthDate=new(DateTime.Now.Year,1,1);
-    bool _genderMale=true;
+    string? _phone = "(+994) 50 555 55 55";
+    DateTime _birthDate = new(DateTime.Now.Year - 20, 1, 1);
+    bool _genderMale = true;
     bool _genderFemale;
     public string? Id { get; set; }
     public string? Name { get => _name; set => _name = value; }
@@ -23,7 +25,7 @@ public class PersonalInformation
             //    _city = value;
             //}
             //else
-                _city = value;
+            _city = value;
         }
     }
     public string? Phone
@@ -42,7 +44,18 @@ public class PersonalInformation
     public PersonalInformation()
     {
         Id = Guid.NewGuid().ToString();
-
+        // Ele yaz ki cvni de data base elave ede bilek 
+    }
+    protected PersonalInformation(PersonalInformation personalInformation)
+    {
+        Id = personalInformation.Id;
+        Name = personalInformation.Name;
+        Surname = personalInformation.Surname;
+        City = personalInformation.City;
+        Phone = personalInformation.Phone;
+        BirthDate = personalInformation.BirthDate;
+        GenderMale = personalInformation.GenderMale;
+        GenderFemale = personalInformation.GenderFemale;
     }
     protected PersonalInformation(string? name, string? surname, string? city, string? phone, DateTime birthDate, bool genderMale, bool genderFemale)
     {

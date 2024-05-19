@@ -1,8 +1,9 @@
-﻿using System.Xml.Linq;
+﻿using System.Windows;
+using System.Xml.Linq;
 
 namespace BossAz_WPF.Models.DataBaseModels;
 
-public class PersonalInformation
+public class PersonalInformation : ICloneable, IComparable
 {
     string? _name = "Qafar";
     string? _surname = "Kerimov";
@@ -44,7 +45,6 @@ public class PersonalInformation
     public PersonalInformation()
     {
         Id = Guid.NewGuid().ToString();
-        // Ele yaz ki cvni de data base elave ede bilek 
     }
     protected PersonalInformation(PersonalInformation personalInformation)
     {
@@ -68,7 +68,24 @@ public class PersonalInformation
         GenderMale = genderMale;
         GenderFemale = genderFemale;
     }
+    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {(City!.Contains(' ') ? City!.Split(' ')[1] : City)} Phone: {Phone!.Replace(' ', '-')} BirthDate: {BirthDate.ToString().Split(' ')[0]} Gender: {(GenderMale is true ? "Male" : "Female")}";
+    public object Clone() => new PersonalInformation(this);
 
-
-
+    public int CompareTo(object? obj)
+    {
+        PersonalInformation? personalInformation;
+        if (obj is not null)
+            personalInformation = obj as PersonalInformation;
+        else
+        {
+            MessageBox.Show("Error: CompareTo in PersonalInformation");
+            throw new NullReferenceException();
+        }
+        if (personalInformation is not null && Name == personalInformation.Name && Surname == personalInformation.Surname && City == personalInformation.City &&
+        Phone == personalInformation.Phone && BirthDate == personalInformation.BirthDate && GenderMale == personalInformation.GenderMale
+        && GenderFemale == personalInformation.GenderFemale)
+            return 0;
+        else
+            return -1;
+    }
 }

@@ -24,6 +24,7 @@ namespace BossAzWPF
         public static string filePath_DataBaseFile = Path.Combine(folderPath_DataBase, "DataBaseFile.txt");
         public static string filePath_DataBaseFileWorkers = Path.Combine(folderPath_DataBase, "DataBaseFileWorkers.txt");
         public static string filePath_DataBaseFileEmployers = Path.Combine(folderPath_DataBase, "DataBaseFileEmployers.txt");
+        public static string filePath_DataBaseFileCv = Path.Combine(folderPath_DataBase, "Cv.txt");
         public static string jsonPath_DataBase = Path.Combine(folderPath_DataBase, "DataBase.json");
         public static string filePath_WorkerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "WorkerClassInfos.txt");
         public static string filePath_EmployerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "EmployerClassInfos.txt");
@@ -64,13 +65,14 @@ namespace BossAzWPF
             Container.RegisterSingleton<MainWindow>();
             Container.RegisterSingleton<SignUpWindow>();
             Container.RegisterSingleton<SignUpUsernameWindow>();
+
             #region Worker
             Container.RegisterSingleton<WorkerWindow>();
             Container.RegisterSingleton<WorkerEditProfilePage>();
             Container.RegisterSingleton<WorkerNotificationsPage>();
             Container.RegisterSingleton<WorkerShowVacanciasPage>();
-
             #endregion
+
             Container.RegisterSingleton<EmployerWindow>();
         }
 

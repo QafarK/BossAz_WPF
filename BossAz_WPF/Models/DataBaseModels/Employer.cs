@@ -15,11 +15,6 @@ public class Employer : PersonalInformation
     {
         Vacancia = vacancia;
     }
-
-    /// <summary>
-    /// TO STRINGINI DUZELT BURDAN VE WORKER CLASSDAN JSONA VE FILE A YAZ
-    /// </summary>
-    /// <returns></returns>
     public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City!.Split(' ')[1]} Phone: {Phone!.Replace(' ', '-')} BirthDate: {BirthDate.ToString().Split(' ')[0]} Gender: {(GenderMale is true ? "Male" : "Female")} Vacancia: {(Vacancia is not null ? Vacancia : "null")}";
 }
 

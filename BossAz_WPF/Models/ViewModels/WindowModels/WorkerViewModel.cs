@@ -8,10 +8,14 @@ using System.Windows.Media.Effects;
 
 namespace BossAz_WPF.Models.ViewModels.WindowModels;
 
-public class WorkerViewModel:BaseClass
+public class WorkerViewModel : BaseClass
 {
     private Page? currentView;
-
+    //public int MyProperty { get; set { currentView.Height}; }
+    //private int _width = 800;
+    //private int _height = 450;
+    //public int Width { get => _width; set { _width = value; OnPropertyChange(); } }
+    //public int Height { get => _height; set { _height = value; OnPropertyChange(); } }
     public Page? CurrentView
     {
         get { return currentView; }
@@ -20,6 +24,8 @@ public class WorkerViewModel:BaseClass
     public ICommand VacanciasCommand { get; set; }
     public ICommand NotificationsCommand { get; set; }
     public ICommand EditProfileCommand { get; set; }
+
+
     public WorkerViewModel()
     {
         VacanciasCommand = new RelayCommand(VacanciasExecute);

@@ -1,14 +1,289 @@
-﻿<Page x:Class="BossAz_WPF.Pages.WorkerEditProfilePage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:BossAz_WPF.Pages"
-      mc:Ignorable="d" 
-      d:DesignHeight="430" d:DesignWidth="680"
-      Title="WorkerEditProfilePage">
+﻿<Page
+    x:Class="BossAz_WPF.Pages.WorkerEditProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BossAz_WPF.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="WorkerEditProfilePage"
+    d:DesignHeight="830"
+    d:DesignWidth="680"
+    Background="AliceBlue"
+    mc:Ignorable="d">
 
     <Grid>
-        <Label VerticalAlignment="Center" HorizontalAlignment="Center"> Edit profile asdasdasdasdasd</Label>
+        <!--<StackPanel VerticalAlignment="Center" Margin="30 0 0 10">
+            <Button Width="300" Height="50" Margin="0 0 0 10" Style="{DynamicResource    MaterialDesignOutlinedLightButton}" Foreground="Gray" BorderBrush="Gray">Edit Personal Information</Button>
+            <Button Width="300" Height="50" Style="{DynamicResource    MaterialDesignOutlinedLightButton}" Foreground="Gray" BorderBrush="Gray">Edit Cv</Button>
+        </StackPanel>-->
+        <TabControl>
+            <TabItem Header="Edit Personal Information">
+                <Grid>
+
+                    <ScrollViewer>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+
+                            <GroupBox
+                                Width="400"
+                                Margin="0,25,0,0"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Header="Name">
+                                <TextBox
+                                    Background="AliceBlue"
+                                    FontSize="18"
+                                    Text="{Binding NewPerson.Name, UpdateSourceTrigger=PropertyChanged}" />
+                            </GroupBox>
+                            <Label
+                                x:Name="nameError"
+                                Height="25"
+                                Margin="7,0,0,0"
+                                Content="{Binding ErrorName, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="13"
+                                Foreground="Red" />
+                            <GroupBox
+                                Width="400"
+                                Margin="0,15,0,0"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Header="Surname">
+                                <TextBox
+                                    Background="AliceBlue"
+                                    FontSize="18"
+                                    Text="{Binding NewPerson.Surname, UpdateSourceTrigger=PropertyChanged}" />
+                            </GroupBox>
+                            <Label
+                                x:Name="surnameError"
+                                Height="25"
+                                Margin="7,0,0,0"
+                                Content="{Binding ErrorSurname, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="13"
+                                Foreground="Red" />
+                            <StackPanel Orientation="Horizontal">
+
+                                <StackPanel>
+                                    <GroupBox
+                                        Width="200"
+                                        Margin="0,15,0,0"
+                                        HorizontalAlignment="Left"
+                                        FontSize="15"
+                                        FontWeight="SemiBold"
+                                        Header="Birth Date">
+                                        <DatePicker FontSize="18" SelectedDate="{Binding NewPerson.BirthDate, UpdateSourceTrigger=PropertyChanged}" />
+                                    </GroupBox>
+                                    <TextBlock
+                                        x:Name="BirthDateError"
+                                        Width="200"
+                                        Height="40"
+                                        Margin="7,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        FontSize="13"
+                                        Foreground="Red"
+                                        Text="{Binding ErrorBirthDate, UpdateSourceTrigger=PropertyChanged}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+
+                                <StackPanel>
+
+                                    <GroupBox
+                                        Width="200"
+                                        Margin="0,15,0,0"
+                                        FontSize="15"
+                                        FontWeight="SemiBold"
+                                        Header="City">
+                                        <ComboBox
+                                            FontSize="18"
+                                            FontWeight="SemiBold"
+                                            SelectedValue="{Binding NewPerson.City, UpdateSourceTrigger=PropertyChanged}">
+                                            <ComboBoxItem Content="Ankara" />
+                                            <ComboBoxItem Content="Baku" />
+                                            <ComboBoxItem Content="Istanbul" />
+                                            <ComboBoxItem Content="Sumqayit" />
+                                        </ComboBox>
+                                    </GroupBox>
+                                    <Label
+                                        x:Name="comboboxError"
+                                        Height="25"
+                                        Margin="7,0,0,0"
+                                        FontSize="13"
+                                        Foreground="Red" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <GroupBox
+                                Width="400"
+                                Margin="0,0,0,0"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Header="Phone">
+                                <TextBox
+                                    x:Name="textBoxPhone"
+                                    Background="AliceBlue"
+                                    FontSize="18"
+                                    Text="{Binding NewPerson.Phone, UpdateSourceTrigger=PropertyChanged}" />
+                            </GroupBox>
+                            <Label
+                                x:Name="phoneError"
+                                Height="25"
+                                Margin="7,0,0,0"
+                                Content="{Binding ErrorPhone, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="13"
+                                Foreground="Red" />
+
+                            <GroupBox
+                                Width="400"
+                                Margin="0,15,0,0"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Header="Gender">
+                                <StackPanel>
+                                    <RadioButton Content="Male" IsChecked="{Binding NewPerson.GenderMale}" />
+                                    <RadioButton
+                                        Margin="0,8,0,0"
+                                        Content="Female"
+                                        IsChecked="{Binding NewPerson.GenderFemale}" />
+                                </StackPanel>
+                            </GroupBox>
+
+                            <Button
+                                Width="200"
+                                Height="50"
+                                Margin="0,25,0,20"
+                                VerticalContentAlignment="Center"
+                                Command="{Binding OkProfileCommand}"
+                                Content="OK"
+                                FontSize="15" />
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Edit Cv">
+                <Grid>
+
+                    <ScrollViewer>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+
+                            <GroupBox
+                                Width="400"
+                                Margin="0,25,0,0"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Header="Profession">
+                                <TextBox
+                                    Background="AliceBlue"
+                                    FontSize="18"
+                                    Text="{Binding Cv.Profession, UpdateSourceTrigger=PropertyChanged}" />
+                            </GroupBox>
+                            <Label
+                                Height="25"
+                                Margin="7,0,0,0"
+                                Content="{Binding ErrorProfession, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="13"
+                                Foreground="Red" />
+                            <GroupBox
+                                Width="400"
+                                Margin="0,15,0,0"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Header="Skills">
+                                <TextBox
+                                    Background="AliceBlue"
+                                    FontSize="18"
+                                    Text="{Binding Cv.Skills, UpdateSourceTrigger=PropertyChanged}" />
+                            </GroupBox>
+                            <Label
+                                Height="25"
+                                Margin="7,0,0,0"
+                                Content="{Binding ErrorSkills, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="13"
+                                Foreground="Red" />
+
+                            <GroupBox
+                                Width="400"
+                                Margin="0,0,0,0"
+                                FontSize="15"
+                                FontWeight="SemiBold"
+                                Header="Companies worked">
+                                <TextBox
+                                    Background="AliceBlue"
+                                    FontSize="18"
+                                    Text="{Binding Cv.CompaniesWorked, UpdateSourceTrigger=PropertyChanged}" />
+                            </GroupBox>
+                            <Label
+                                Height="25"
+                                Margin="7,0,0,0"
+                                Content="{Binding ErrorCompaniesWorked, UpdateSourceTrigger=PropertyChanged}"
+                                FontSize="13"
+                                Foreground="Red" />
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <StackPanel>
+                                    <GroupBox
+                                        Width="200"
+                                        Margin="0,15,0,0"
+                                        HorizontalAlignment="Left"
+                                        FontSize="15"
+                                        FontWeight="SemiBold"
+                                        Header="Begining Work Time">
+                                        <DatePicker FontSize="18" SelectedDate="{Binding Cv.BeginingWorkTime, UpdateSourceTrigger=PropertyChanged}" />
+                                    </GroupBox>
+                                    <TextBlock
+                                        Width="200"
+                                        Height="40"
+                                        Margin="7,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        FontSize="13"
+                                        Foreground="Red"
+                                        Text="{Binding ErrorBeginingWorkTime, UpdateSourceTrigger=PropertyChanged}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <GroupBox
+                                        Width="200"
+                                        Margin="0,15,0,0"
+                                        HorizontalAlignment="Right"
+                                        FontSize="15"
+                                        FontWeight="SemiBold"
+                                        Header="Ending Work Time">
+                                        <DatePicker FontSize="18" SelectedDate="{Binding Cv.EndingWorkTime, UpdateSourceTrigger=PropertyChanged}" />
+                                    </GroupBox>
+                                    <TextBlock
+                                        Width="200"
+                                        Height="40"
+                                        Margin="7,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        FontSize="13"
+                                        Foreground="Red"
+                                        Text="{Binding ErrorBeginingWorkTime, UpdateSourceTrigger=PropertyChanged}"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+
+                            </StackPanel>
+
+
+
+                            <Button
+                                Width="200"
+                                Height="50"
+                                Margin="0,25,0,20"
+                                VerticalContentAlignment="Center"
+                                Command="{Binding OkCvCommand}"
+                                Content="OK"
+                                FontSize="15" />
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

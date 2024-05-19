@@ -20,7 +20,7 @@ public class Worker : PersonalInformation
 
     //public Worker(string? name, string? surname, string? city, string? phone, DateTime age, bool genderMale, bool genderFemale) : base(name, surname, city, phone, age, genderMale, genderFemale)
     //{ }
-    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City!.Split(' ')[1]} Phone: {Phone!.Replace(' ', '-')} BirthDate: {BirthDate.ToString().Split(' ')[0]} Gender: {(GenderMale is true ? "Male" : "Female")} Cv: {(Cv is not null ? Cv.ToString2() : "null")}";
+    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {(City!.Contains(' ') ? City!.Split(' ')[1]: City)} Phone: {Phone!.Replace(' ', '-')} BirthDate: {BirthDate.ToString().Split(' ')[0]} Gender: {(GenderMale is true ? "Male" : "Female")} Cv: {(Cv is not null ? Cv.ToString2() : "null")}";
 
     //public string ToStringDropn() => $"Id: {Id}\n Name: {Name}\n Surname: {Surname}\n City: {City}\n Phone: {Phone}\n BirthDate: {BirthDate}\n {Cv.ToStringDropn()}";
 }
@@ -30,8 +30,8 @@ public class CV
     string? _profession;
     string? _skills;
     string? _companiesWorked;
-    string? _beginingWorkTime;
-    string? _endingWorkTime;
+    DateTime _beginingWorkTime;
+    DateTime _endingWorkTime;
     public string? Profession
     {
         get => _profession;
@@ -75,11 +75,11 @@ public class CV
                 _companiesWorked = value;
         }
     }
-    public string? BeginingWorkTime { get => _beginingWorkTime; set => _beginingWorkTime = value; }
-    public string? EndingWorkTime { get => _endingWorkTime; set => _endingWorkTime = value; }
+    public DateTime BeginingWorkTime { get => _beginingWorkTime; set => _beginingWorkTime = value; }
+    public DateTime EndingWorkTime { get => _endingWorkTime; set => _endingWorkTime = value; }
 
 
-    public CV(string? profession, string? skills, string? companiesWorked, string? beginingWorkTime, string? endingWorkTime)
+    public CV(string? profession, string? skills, string? companiesWorked, DateTime beginingWorkTime, DateTime endingWorkTime)
     {
         Profession = profession;
         Skills = skills;
@@ -87,8 +87,12 @@ public class CV
         BeginingWorkTime = beginingWorkTime;
         EndingWorkTime = endingWorkTime;
     }
+    public CV()
+    {
+        
+    }
     public override string ToString() => @$"Profession: {_profession} Skills: {_skills} Companies Worked: {_companiesWorked} Beginning Work Time: {_beginingWorkTime} Ending Work Time: {_endingWorkTime}";
-    public string ToString2() => $@"Profession: {_profession} Skills: {_skills} Companies-Worked: {_companiesWorked} Beginning-Work-Time: {_beginingWorkTime} Ending-Work-Time: {_endingWorkTime}";
+    public string ToString2() => $@"Profession: {_profession.Replace(' ', '-')} Skills: {_skills.Replace(' ', '-')} Companies-Worked: {_companiesWorked.Replace(' ','-')} Beginning-Work-Time: {_beginingWorkTime.ToString().Split(' ')[0]} Ending-Work-Time: {_endingWorkTime.ToString().Split(' ')[0]}";
     public string ToStringDropn() => $"Profession: {_profession}\n Skills: {_skills}\n Companies-Worked: {_companiesWorked}\n Beginning-Work-Time: {_beginingWorkTime}\n Ending-Work-Time: {_endingWorkTime}";
 
 }

@@ -181,7 +181,6 @@ public class SignUpUsernameViewModel : BaseClass
                 ErrorPassword = null;
             if (!Password!.Equals(Repassword))
                 ErrorRepassword = "*Password is not matching";
-
             else
                 ErrorRepassword = null;
 

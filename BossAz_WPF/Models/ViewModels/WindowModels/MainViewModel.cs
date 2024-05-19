@@ -1,4 +1,6 @@
-﻿using BossAz_WPF.Models.ViewModels.WindowModels;
+﻿using BossAz_WPF.Models.DataBaseModels;
+using BossAz_WPF.Models.ViewModels.PageModels;
+using BossAz_WPF.Models.ViewModels.WindowModels;
 using BossAz_WPF.Windows;
 using BossAzWPF;
 using BossAzWPF.Commands;
@@ -56,16 +58,10 @@ public class MainViewModel : BaseClass
                             {
                                 ErrorLogin = null;
                                 if (data[7].Equals("Worker"))
-                                {
-                                    App.Container.GetInstance<MainWindow>().Hide();
-                                    var view = App.Container.GetInstance<WorkerWindow>();
-                                    view.DataContext = App.Container.GetInstance<WorkerViewModel>();
-                                    view.Show();
-                                    MessageBox.Show("Your CV is empty. Please fill it in \"EditProfile\"");
-                                }
+                                    ShowWorker(data[1]);
                                 else if (data[7].Equals("Employer"))
                                 {
-                                    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                    ShowEmployer(data[1]);
                                 }
                                 return; //////
                             }
@@ -76,6 +72,79 @@ public class MainViewModel : BaseClass
                 } while (!reader.EndOfStream);
                 ErrorLogin = "*Username or password is incorrect";
             }
+        }
+    }
+
+    private void ShowEmployer(string id)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void ShowWorker(string id)
+    {
+        try
+        {
+
+            using FileStream fileRead = new(App.filePath_DataBaseFileWorkers, FileMode.Open, FileAccess.Read);
+            using StreamReader reader = new StreamReader(fileRead);
+            do
+            {
+                string? line = reader.ReadLine();
+                if (line is not null)
+                {
+                    var data = line.Split(' ');
+                    if (id.Equals(data[1]))
+                    {
+                        reader.Close();
+                        App.Container.GetInstance<MainWindow>().Hide();
+                        var view = App.Container.GetInstance<WorkerWindow>();
+                        view.DataContext = App.Container.GetInstance<WorkerViewModel>();
+                        view.Show();
+
+                        #region PersonalInformation
+                        var person = App.Container.GetInstance<PersonalInformation>();
+                        person.Id = data[1];
+                        person.Name = data[3];
+                        person.Surname = data[5];
+                        person.City = data[7];
+                        person.Phone = data[9].Replace('-', ' ');
+                        person.BirthDate = new(Convert.ToInt32(data[11].Split('/')[2]), Convert.ToInt32(data[11].Split('/')[0]), Convert.ToInt32(data[11].Split('/')[1]));
+                        if (data[13].Equals("Male"))
+                        {
+                            person.GenderMale = true;
+                            person.GenderFemale = false;
+                        }
+                        else
+                        {
+                            person.GenderMale = false;
+                            person.GenderFemale = true;
+                        }
+
+                        #endregion
+
+                        if (!data[15].Equals("null"))
+                        {
+                            App.Container.GetInstance<WorkerEditProfileViewModel>().Cv = new(data[16], data[18], data[20],
+                            new(Convert.ToInt32(data[22].Split('/')[2]), Convert.ToInt32(data[22].Split('/')[0]), Convert.ToInt32(data[22].Split('/')[1])),
+                                new(Convert.ToInt32(data[24].Split('/')[2]), Convert.ToInt32(data[24].Split('/')[0]), Convert.ToInt32(data[24].Split('/')[1])));
+                        }
+                        else
+                        {
+                            App.Container.GetInstance<WorkerEditProfileViewModel>().Cv = new();
+                            MessageBox.Show("Your CV is empty. Please fill it in \"EditProfile\"");
+                        }
+
+                        App.Container.GetInstance<WorkerEditProfileViewModel>().ComparePerson = App.Container.GetInstance<PersonalInformation>().Clone() as PersonalInformation;
+
+                        return;
+
+                    }
+                }
+            } while (!reader.EndOfStream);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message+" in MainViewModel");
         }
     }
 }

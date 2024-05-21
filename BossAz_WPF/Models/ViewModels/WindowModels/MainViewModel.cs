@@ -60,10 +60,8 @@ public class MainViewModel : BaseClass
                                 if (data[7].Equals("Worker"))
                                     ShowWorker(data[1]);
                                 else if (data[7].Equals("Employer"))
-                                {
                                     ShowEmployer(data[1]);
-                                }
-                                return; //////
+                                return;
                             }
                             else
                                 break;
@@ -77,7 +75,64 @@ public class MainViewModel : BaseClass
 
     private void ShowEmployer(string id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            using FileStream fileRead = new(App.filePath_DataBaseFileEmployers, FileMode.Open, FileAccess.Read);
+            using StreamReader reader = new StreamReader(fileRead);
+            do
+            {
+                string? line = reader.ReadLine();
+                if (line is not null)
+                {
+                    var data = line.Split(' ');
+                    if (id.Equals(data[1]))
+                    {
+                        reader.Close();
+                        App.Container.GetInstance<MainWindow>().Hide();
+                        var view = App.Container.GetInstance<EmployerWindow>();
+                        view.DataContext = App.Container.GetInstance<EmployerViewModel>();
+                        view.Show();
+
+                        #region PersonalInformation
+                        var person = App.Container.GetInstance<PersonalInformation>();
+                        person.Id = data[1];
+                        person.Name = data[3];
+                        person.Surname = data[5];
+                        person.City = data[7];
+                        person.Phone = data[9].Replace('-', ' ');
+                        person.BirthDate = new(Convert.ToInt32(data[11].Split('/')[2]), Convert.ToInt32(data[11].Split('/')[0]), Convert.ToInt32(data[11].Split('/')[1]));
+                        if (data[13].Equals("Male"))
+                        {
+                            person.GenderMale = true;
+                            person.GenderFemale = false;
+                        }
+                        else
+                        {
+                            person.GenderMale = false;
+                            person.GenderFemale = true;
+                        }
+                        #endregion
+
+                        if (!data[15].Equals("null"))
+                            App.Container.GetInstance<EmployerEditProfileViewModel>().Vacancia = new(data[16].Replace('-',' '), data[18].Replace('-', ' '));
+                        else
+                        {
+                            App.Container.GetInstance<EmployerEditProfileViewModel>().Vacancia = new();
+                            MessageBox.Show("Your Vacancia is empty. Please fill it in \"EditProfile\"");
+                        }
+
+                        App.Container.GetInstance<EmployerEditProfileViewModel>().ComparePerson = App.Container.GetInstance<PersonalInformation>().Clone() as PersonalInformation;
+
+                        return;
+
+                    }
+                }
+            } while (!reader.EndOfStream);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message + " in MainViewModel");
+        }
     }
 
     private void ShowWorker(string id)

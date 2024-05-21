@@ -25,6 +25,7 @@ namespace BossAzWPF
         public static string filePath_DataBaseFileWorkers = Path.Combine(folderPath_DataBase, "DataBaseFileWorkers.txt");
         public static string filePath_DataBaseFileEmployers = Path.Combine(folderPath_DataBase, "DataBaseFileEmployers.txt");
         public static string filePath_DataBaseFileCv = Path.Combine(folderPath_DataBase, "Cv.txt");
+        public static string filePath_DataBaseFileVacancia = Path.Combine(folderPath_DataBase, "Vacancia.txt");
         public static string jsonPath_DataBase = Path.Combine(folderPath_DataBase, "DataBase.json");
         public static string filePath_WorkerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "WorkerClassInfos.txt");
         public static string filePath_EmployerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "EmployerClassInfos.txt");
@@ -58,6 +59,13 @@ namespace BossAzWPF
             Container.RegisterSingleton<WorkerNotificationsViewModel>();
             Container.RegisterSingleton<WorkerShowVacanciasViewModel>();
             #endregion
+
+            #region Employer
+            Container.RegisterSingleton<EmployerViewModel>();
+            Container.RegisterSingleton<EmployerEditProfileViewModel>();
+            Container.RegisterSingleton<EmployerNotificationsViewModel>();
+            Container.RegisterSingleton<EmployerApplyVacanciasViewModel>();
+            #endregion
         }
 
         private void RegisterViews()
@@ -73,7 +81,12 @@ namespace BossAzWPF
             Container.RegisterSingleton<WorkerShowVacanciasPage>();
             #endregion
 
+            #region Employer
             Container.RegisterSingleton<EmployerWindow>();
+            Container.RegisterSingleton<EmployerEditProfilePage>();
+            Container.RegisterSingleton<EmployerNotificationsPage>();
+            Container.RegisterSingleton<EmployerApplyVacanciasPage>();
+            #endregion
         }
 
         protected override void OnStartup(StartupEventArgs e)

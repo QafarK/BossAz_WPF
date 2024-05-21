@@ -1,23 +1,21 @@
 ﻿using BossAz_WPF.Models.DataBaseModels;
-using BossAz_WPF.Windows;
-using BossAzWPF;
 using BossAzWPF.Commands;
+using BossAzWPF;
 using System.IO;
-using System.Reflection.PortableExecutable;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows;
+using System.Text;
 using System.Windows.Input;
+using System.Windows;
 
 namespace BossAz_WPF.Models.ViewModels.PageModels;
-public class WorkerEditProfileViewModel : BaseClass
+public class EmployerEditProfileViewModel:BaseClass
 {
+    Vacancia? vacancia;
+
     private PersonalInformation? newPerson;
     public PersonalInformation? NewPerson { get => newPerson; set { newPerson = value; OnPropertyChange(); } }
     public PersonalInformation? ComparePerson { get; set; }
-
-    private CV? cv;
-    public CV? Cv { get => cv; set => cv = value; }
+    public Vacancia? Vacancia { get => vacancia; set => vacancia = value; }
 
     string? errorName;
     string? errorSurname;
@@ -39,31 +37,30 @@ public class WorkerEditProfileViewModel : BaseClass
     public string? ErrorCompaniesWorked { get => errorCompaniesWorked; set => errorCompaniesWorked = value; }
     public string? ErrorBeginingWorkTime { get => errorBeginingWorkTime; set => errorBeginingWorkTime = value; }
     public string? ErrorEndingWorkTime { get => errorEndingWorkTime; set => errorEndingWorkTime = value; }
-    public WorkerEditProfileViewModel()
+    public EmployerEditProfileViewModel()
     {
         NewPerson = App.Container.GetInstance<PersonalInformation>();
         OkProfileCommand = new RelayCommand(EditProfileExecute, CanProfileEdit);
-        OkCvCommand = new RelayCommand(EditCvExecute, CanCvEdit);
+        OkVacanciaCommand = new RelayCommand(EditVacanicaExecute, CanVacanicaEdit);
     }
 
     public ICommand OkProfileCommand { get; set; }
-    public ICommand OkCvCommand { get; set; }
+    public ICommand OkVacanciaCommand { get; set; }
 
-    #region CvCommand
-    public bool CanCvEdit(object? obj)
+    #region VacanciaCommand
+    public bool CanVacanicaEdit(object? obj)
     {
-        if (Cv is not null && !string.IsNullOrEmpty(Cv.Profession) && !string.IsNullOrEmpty(Cv.Skills) && !string.IsNullOrEmpty(Cv.CompaniesWorked)
-            && !string.IsNullOrEmpty(Cv.BeginingWorkTime.ToString()) && !string.IsNullOrEmpty(Cv.EndingWorkTime.ToString()))
+        if (Vacancia is not null && !string.IsNullOrEmpty(Vacancia.Title) && !string.IsNullOrEmpty(Vacancia.Text))
             return true;
         return false;
     }
-    public void EditCvExecute(object? obj)
+    public void EditVacanicaExecute(object? obj)
     {
         try
         {
 
             StringBuilder stringBuilder = new StringBuilder();
-            using FileStream fileRead = new(App.filePath_DataBaseFileWorkers, FileMode.Open, FileAccess.Read);
+            using FileStream fileRead = new(App.filePath_DataBaseFileEmployers, FileMode.Open, FileAccess.Read);
             using StreamReader reader = new StreamReader(fileRead);
             do
             {
@@ -72,20 +69,20 @@ public class WorkerEditProfileViewModel : BaseClass
                 {
                     var data = line.Split(' ');
                     if (NewPerson!.Id!.Equals(data[1]))
-                        stringBuilder.AppendLine(new Worker(NewPerson, Cv).ToString());
+                        stringBuilder.AppendLine(new Employer(NewPerson, Vacancia).ToString());
                     else
                         stringBuilder.AppendLine(line);
                 }
             } while (!reader.EndOfStream);
             fileRead.Close();
             reader.Close();
-            using FileStream fileWrite = new(App.filePath_DataBaseFileWorkers, FileMode.Create, FileAccess.Write);
+            using FileStream fileWrite = new(App.filePath_DataBaseFileEmployers, FileMode.Create, FileAccess.Write);
             using StreamWriter writer = new StreamWriter(fileWrite);
             writer.Write(stringBuilder);
 
-            using FileStream fileWrite1 = new(App.filePath_DataBaseFileCv, FileMode.Append, FileAccess.Write);
+            using FileStream fileWrite1 = new(App.filePath_DataBaseFileVacancia, FileMode.Append, FileAccess.Write);
             using StreamWriter writer1 = new StreamWriter(fileWrite1);
-            writer1.WriteLine("Id: " + NewPerson!.Id + " " + Cv!.ToString2());
+            writer1.WriteLine("Id: " + NewPerson!.Id + " " + Vacancia!.ToString2());
         }
         catch (Exception ex)
         {
@@ -152,7 +149,7 @@ public class WorkerEditProfileViewModel : BaseClass
                         {
                             var data = line.Split(' ');
                             if (NewPerson.Id!.Equals(data[1]))
-                                stringBuilder.AppendLine(NewPerson.ToString() + (!string.IsNullOrEmpty(Cv!.Profession) ? Cv.ToString2(): "CV: null"));
+                                stringBuilder.AppendLine(NewPerson.ToString() + (!string.IsNullOrEmpty(Vacancia!.Title) ? Vacancia.ToString2() : "CV: null"));
                             else
                                 stringBuilder.AppendLine(line);
                         }
@@ -171,5 +168,7 @@ public class WorkerEditProfileViewModel : BaseClass
         }
     }
     #endregion
+
+
 }
 

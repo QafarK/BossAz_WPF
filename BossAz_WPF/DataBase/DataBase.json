@@ -64,5 +64,11 @@
     "Username": "qafarwer",
     "Password": "qafar1234",
     "IsWorkerOrEmployer": "Worker"
+  },
+  {
+    "Id": "23295244-e780-4453-9c2b-e818b2767a90",
+    "Username": "qafaremp",
+    "Password": "qafar123",
+    "IsWorkerOrEmployer": "Employer"
   }
 ]

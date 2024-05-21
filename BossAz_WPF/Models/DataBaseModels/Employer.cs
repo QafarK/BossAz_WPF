@@ -15,7 +15,7 @@ public class Employer : PersonalInformation
     {
         Vacancia = vacancia;
     }
-    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {City!.Split(' ')[1]} Phone: {Phone!.Replace(' ', '-')} BirthDate: {BirthDate.ToString().Split(' ')[0]} Gender: {(GenderMale is true ? "Male" : "Female")} Vacancia: {(Vacancia is not null ? Vacancia : "null")}";
+    public override string ToString() => $"Id: {Id} Name: {Name} Surname: {Surname} City: {(City!.Contains(' ') ? City!.Split(' ')[1] : City)} Phone: {Phone!.Replace(' ', '-')} BirthDate: {BirthDate.ToString().Split(' ')[0]} Gender: {(GenderMale is true ? "Male" : "Female")} Vacancia: {(Vacancia is not null ? Vacancia.ToString2() : "null")}";
 }
 
 public class Vacancia
@@ -27,12 +27,6 @@ public class Vacancia
         get => _title;
         set
         {
-            if (value!.Contains(' '))
-            {
-                value = value.Replace(' ', '-');
-                _title = value;
-            }
-            else
                 _title = value;
         }
     }
@@ -41,12 +35,6 @@ public class Vacancia
         get => _text;
         set
         {
-            if (value!.Contains(' '))
-            {
-                value = value.Replace(' ', '-');
-                _text = value;
-            }
-            else
                 _text = value;
         }
     }
@@ -56,7 +44,12 @@ public class Vacancia
         Title = title;
         Text = text;
     }
+    public Vacancia()
+    {
+        
+    }
     public override string ToString() => $"Title: {Title} Text: {Text}";
+    public  string ToString2() => $"Title: {Title!.Replace(' ', '-')} Text: {Text!.Replace(' ', '-')}";
 
 }
 record EmployerRCD

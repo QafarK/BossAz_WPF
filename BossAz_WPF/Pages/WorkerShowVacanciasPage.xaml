@@ -9,6 +9,30 @@
       Title="WorkerShowVacanciasPage">
 
     <Grid>
-        
+        <ListView ItemsSource="{Binding Vacancias}" Name="ListView1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="160" Header="Title" DisplayMemberBinding="{Binding Title}"/>
+                    <GridViewColumn Width="280" Header="Text" DisplayMemberBinding="{Binding Text}"/>
+
+                    <GridViewColumn Header="Apply" Width="160">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Width="130" Content="Apply" Command="{Binding ElementName=ListView1, Path=DataContext.ApplyCommand}" CommandParameter="{Binding Text}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+                    <!--<GridViewColumn Header="Delete" Width="150">
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Width="130" Content="Delete" Command="{Binding ElementName=ListView1, Path=DataContext.DeleteCommand}" CommandParameter="{Binding Id}"/>
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>-->
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Page>

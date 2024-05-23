@@ -26,6 +26,8 @@ namespace BossAzWPF
         public static string filePath_DataBaseFileEmployers = Path.Combine(folderPath_DataBase, "DataBaseFileEmployers.txt");
         public static string filePath_DataBaseFileCv = Path.Combine(folderPath_DataBase, "Cv.txt");
         public static string filePath_DataBaseFileVacancia = Path.Combine(folderPath_DataBase, "Vacancia.txt");
+        public static string filePath_DataBaseFileEmployerNotifications = Path.Combine(folderPath_DataBase, "EmployerNotifications.txt");
+        public static string filePath_DataBaseFileWorkerNotifications = Path.Combine(folderPath_DataBase, "WorkerNotifications.txt");
         public static string jsonPath_DataBase = Path.Combine(folderPath_DataBase, "DataBase.json");
         public static string filePath_WorkerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "WorkerClassInfos.txt");
         public static string filePath_EmployerClassInfos = Path.Combine(folderPath_ModelsConvertedFile, "EmployerClassInfos.txt");

@@ -5,12 +5,12 @@ namespace BossAz_WPF.Models.DataBaseModels;
 
 public class PersonalInformation : ICloneable, IComparable
 {
-    string? _name = "Qafar";
-    string? _surname = "Kerimov";
+    string? _name;
+    string? _surname;
     string? _city;
-    string? _phone = "(+994) 50 555 55 55";
+    string? _phone;
     DateTime _birthDate = new(DateTime.Now.Year - 20, 1, 1);
-    bool _genderMale = true;
+    bool _genderMale;
     bool _genderFemale;
     public string? Id { get; set; }
     public string? Name { get => _name; set => _name = value; }

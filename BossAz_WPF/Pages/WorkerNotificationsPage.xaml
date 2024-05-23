@@ -9,6 +9,6 @@
       Title="WorkerNotificationsPage">
 
     <Grid>
-        
+        <ListView Margin="10 0 0 0" ItemsSource="{Binding Notifications}"/>
     </Grid>
 </Page>
